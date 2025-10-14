@@ -16,20 +16,44 @@ public class Main {
         Robot ChatGPT = new Robot("Open AI Chat GTP", 1
                 , 1000, "Clanker", "Snapdragon 8 Elite","Android 16");
 
+
         //array with robot objects
         Robot[] Robots = {Megatron, OptimusPrime, ChatGPT };
 
-        //for each function to report status for each robot object
         for (Robot robot : Robots) {
             robot.reportStatus();
+        }
+
+        for(int i = 0; i< 14; i++){
+            System.out.println("\n======================================");
+            System.out.println("Day: " + world.getSavedDay() +": " + world.getDay(world.getSavedDay()));
+            System.out.println("\n======================================");
+
+
+            boolean raining = world.getIsRaining();
+            System.out.println("Weather: " +  (raining ? "Its raining outside" : "The weather is clear!"));
+
+            for(Robot robot : Robots){
+                System.out.println("\n-- Testing " + robot.getName() + " --");
+
+                robot.canWalkToThePark(world);
+                robot.canDanceAtClub(world);
+            }
+            world.nextDay();
+        }
+
+        //for each function to report status for each robot object
+       /* for (Robot robot : Robots) {
+            robot.reportStatus();
+
             //here we can set the amount of days in the for the loop to run
             int daysWanted = 10;
 
             //here is just some testing to see if everything works
             for (int i = 0; i < daysWanted; i++) {
                 System.out.println("=== Start of day for "+ robot.getName() +" "+ world.getSavedDay() + " (" + world.getDay(world.getSavedDay()) + ") ===");
-
                 boolean raining = world.getIsRaining();
+                System.out.println(raining);
                 if (raining) {
                     System.out.println("Robots stay home because it rains.");
                 } else {
@@ -41,7 +65,7 @@ public class Main {
                 //next day
                 world.nextDay();
             }
-        }
+        }*/
 
     }
 }

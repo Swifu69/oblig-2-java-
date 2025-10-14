@@ -44,56 +44,59 @@ public class Robot {
 
     //Method to check if the robot can go to the park
     public boolean canWalkToThePark(World world) {
-        //Get distance to park for the robot we make and divide by one hundred, so we can get the battery level we need to reach the park
         double batteryNeeded = getDistanceToPark() / 100;
-/*Check conditions first check if the day is not sunday, if its sunday go next or if its not then return false
-,then check for rain, if its not raining then go next, and then check if we have enough battery, if all conditions are met
-for the robot to go to the park return true */
+        boolean canWalk = true;
+
         if (!world.isSunday()) {
-            System.out.println("Cant go to the park because it is not sunday");
-            return false;
-        } else {
-
-            if (world.getIsRaining()) {
-                System.out.println(getName() + " cant go outside, because it is raining");
-                return false;
-            } else {
-
-                if (getBatteryLevel() < batteryNeeded) {
-                    System.out.println(getName() + " cant go to the park because it does not have enough battery");
-                    System.out.println("Battery needed: " + batteryNeeded + "%, current: " + getBatteryLevel() + "%");
-                    return false;
-                }
-            }
-            return true;
+            System.out.println(getName() + " can't go to the park because it is not Sunday.");
+            canWalk = false;
         }
+        if (world.getIsRaining()) {
+            System.out.println(getName() + " can't go outside because it is raining.");
+            canWalk = false;
+        }
+        if (getBatteryLevel() < batteryNeeded) {
+            System.out.println(getName() + " can't go to the park because it does not have enough battery.");
+            System.out.println("Battery needed: " + batteryNeeded + "%, current: " + getBatteryLevel() + "%");
+            canWalk = false;
+        }
+
+        if (canWalk) {
+            System.out.println(getName() + " can go to the park because all conditions are met!");
+        }
+
+        return canWalk;
     }
+
 
     /*Kinda the same as what We wrote on canWalkToThePark() return false if its monday, return false if its raining,
     return false if the robot does not have enough battery, if none of the if statements are true, then just return true because the robot meets all the criteria, else return false */
 
     public boolean canDanceAtClub(World world) {
+        boolean canDance = true;
 
         if (world.isMonday()) {
-            System.out.println(getName() + " cant go to the club, because the danceclub is closed on mondays");
-            return false;
-        } else {
-            if (world.getIsRaining()) {
-                System.out.println(getName() + " cant go to the club because it is raining");
-                return false;
-            } else {
-                if (getBotType().equals("Clanker")) {
-                    System.out.println(getName() + " cant go to the club because it is Clanker");
-                    return false;
-                } else {
-                    if (getBatteryLevel() < 50) {
-                        System.out.println(getName() + " cant go to the club because it needs at least 50% battery to dance");
-                        return false;
-                    }
-                }
-            }
+            System.out.println(getName() + " can't go to the club, because the dance club is closed on Mondays.");
+            canDance = false;
         }
-        System.out.println(getName() + " Can go to the club, because he meets all the criteria");
-        return true;
+        if (world.getIsRaining()) {
+            System.out.println(getName() + " can't go to the club because it is raining.");
+            canDance = false;
+        }
+        if (getBotType().equals("Clanker")) {
+            System.out.println(getName() + " can't go to the club because it is a Clanker.");
+            canDance = false;
+        }
+        if (getBatteryLevel() < 50) {
+            System.out.println(getName() + " can't go to the club because it needs at least 50% battery to dance.");
+            canDance = false;
+        }
+
+        if (canDance) {
+            System.out.println(getName() + " can go to the club, because all criteria are met!");
+        }
+
+        return canDance;
     }
+
 }
