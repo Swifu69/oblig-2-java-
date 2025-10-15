@@ -44,6 +44,7 @@ public class Robot {
 
     //Method to check if the robot can go to the park
     public boolean canWalkToThePark(World world) {
+        //dividing distance by hundred to get how much batery is needed acording to the distance to the park
         double batteryNeeded = getDistanceToPark() / 100;
         boolean canWalk = true;
 
@@ -69,8 +70,7 @@ public class Robot {
     }
 
 
-    /*Kinda the same as what We wrote on canWalkToThePark() return false if its monday, return false if its raining,
-    return false if the robot does not have enough battery, if none of the if statements are true, then just return true because the robot meets all the criteria, else return false */
+    /*Changed the way we aproched things, there is a boolean that gets updated if a condition is not met, if all conditions are met then make it true and return it*/
 
     public boolean canDanceAtClub(World world) {
         boolean canDance = true;
@@ -83,8 +83,9 @@ public class Robot {
             System.out.println(getName() + " can't go to the club because it is raining.");
             canDance = false;
         }
-        if (getBotType().equals("Clanker")) {
-            System.out.println(getName() + " can't go to the club because it is a Clanker.");
+        //Clankers and B-Bots cant come to the club....
+        if (getBotType().equals("Clanker")|| getBotType().equals("B-Bot")) {
+            System.out.println(getName() + " can't go to the club because it is a Clanker or B-Bot.");
             canDance = false;
         }
         if (getBatteryLevel() < 50) {
